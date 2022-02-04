@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'main_app',
-    'counter',
+    # 'counter',
     'rest_framework',
+    'counter.apps.CounterConfig',
 ]
 
 MIDDLEWARE = [
