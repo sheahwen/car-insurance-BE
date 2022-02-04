@@ -9,6 +9,9 @@ class Users(models.Model):
     email = models.EmailField(max_length=255, unique=True)
     password = models.CharField(max_length=30)
 
+    def __str__(self):
+        return self.username
+
 
 class Licenses(models.Model):
     ic_no = models.CharField(max_length=9, primary_key=True, validators=[RegexValidator(regex=r'^[A-Z]\d{7}[A-Z]')])
@@ -19,6 +22,9 @@ class Licenses(models.Model):
     license_no = models.CharField(max_length=9, unique=True, validators=[RegexValidator(regex=r'^[A-Z]\d{7}[A-Z]')])
     expiry_date = models.DateField()
     user = models.OneToOneField(Users, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.ic_no
 
 
 class Vehicles(models.Model):
@@ -32,6 +38,32 @@ class Vehicles(models.Model):
     model = models.CharField(max_length=255)
     capacity = models.PositiveSmallIntegerField()
     year_of_registration = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(today_year)])
-    ## may need to check today_year data type
+    # may need to check today_year data type
     coe_expiry_date = models.DateField()
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.vehicle_no
+
+
+class Contracts(models.Model):
+    contract_no = models.CharField(max_length=10, primary_key=True, validators=[RegexValidator(regex=r'^[A-Z]\d{9}')])
+    base_rate = models.PositiveIntegerField()
+    km_rate = models.DecimalField(max_digits=3, decimal_places=2)
+    start_date = models.DateField(null=True)  # same as approval date
+    end_date = models.DateField(null=True)
+    application_date = models.DateField(auto_now_add=True)
+    application_status = models.BooleanField(default=False)
+    vehicle = models.OneToOneField(Vehicles, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return self.contract_no
+
+
+class Payables(models.Model):
+    id = models.AutoField(primary_key=True)
+    amount = models.DecimalField(max_digits=9, decimal_places=2)
+    month = models.PositiveSmallIntegerField()
+    year = models.PositiveSmallIntegerField()
+    outstanding = models.BooleanField(default=True)
+    contract = models.ForeignKey(Contracts, on_delete=models.PROTECT)
