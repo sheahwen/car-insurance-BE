@@ -84,6 +84,7 @@ class UserDetail(APIView):
 
         return Response(data)
 
+
 class ChartDay(APIView):
 
     def get(self, request, pk):
