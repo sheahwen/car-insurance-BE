@@ -17,8 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 
+admin.site.site_header = 'km-insur admin'
+admin.site.index_title = 'Admin'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('user/', include('main_app.urls'))
+    path('user/', include('main_app.urls')),
+    path('admin/', admin.site.urls),
 ]
