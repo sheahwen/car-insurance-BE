@@ -23,5 +23,5 @@ admin.site.index_title = 'Admin'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('user/', include('main_app.urls')),
-    path('admin/', admin.site.urls),
+    path('jwt-api/', include('jwt_token.urls')),
 ]
