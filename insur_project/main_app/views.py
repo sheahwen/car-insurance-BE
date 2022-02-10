@@ -122,6 +122,44 @@ class VehicleDetail(APIView):
         return Response(data)
 
 
+class CreateUser(APIView):
+
+    def post(self, request):
+
+        newuser = Users(
+            username=request.data['username'],
+            password=request.data['password'],
+            email=request.data['email']
+        )
+
+        newuser.save()
+
+        license = Licenses(
+            ic_no=request.data['ic'],
+            first_name=request.data['firstname'],
+            last_name=request.data['lastname'],
+            phone=request.data['phone'],
+            dob=request.data['dob'],
+            license_no=request.data['licenseno'],
+            expiry_date='2055-12-31',
+            user=newuser
+        )
+        license.save()
+
+        vehicle = Vehicles(
+            vehicle_no=request.data['vehicleno'],
+            vehicle_type=request.data['type'],
+            make=request.data['make'],
+            model=request.data['model'],
+            capacity=request.data['capacity'],
+            year_of_registration=request.data['registrationyear'],
+            coe_expiry_date=request.data['coeexp'],
+            user=newuser
+        )
+        vehicle.save()
+
+        return Response("user created!")
+
 
 class ActiveContracts(APIView):
 
