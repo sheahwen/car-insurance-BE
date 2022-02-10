@@ -6,4 +6,5 @@ urlpatterns = [
     path('user-detail/<str:pk>/', views.UserDetail.as_view()),
     path('active-contracts/', views.ActiveContracts.as_view()),
     path('chart/day/<str:pk>/', views.ChartDay.as_view()),
+    path('vehicle-detail/<str:pk>/', views.VehicleDetail.as_view())
 ]

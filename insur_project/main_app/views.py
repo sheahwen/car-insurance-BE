@@ -108,6 +108,21 @@ class ChartDay(APIView):
         return Response(day)
 
 
+class VehicleDetail(APIView):
+
+    def get(self, request, pk):
+        vehicle = Vehicles.objects.get(vehicle_no=pk)
+        serializer_vehicle = VehicleSerializer(vehicle)
+        contracts = Contracts.objects.get(vehicle_id=pk)
+        serializer_contract = ContractSerializer(contracts)
+        contract_number = serializer_contract.data['contract_no']
+        mileage = Mileages.objects.filter(contract_id=contract_number).values('date', 'km')
+        data = {'vehicle': serializer_vehicle.data, 'contract': serializer_contract.data, 'mileage': mileage}
+
+        return Response(data)
+
+
+
 class ActiveContracts(APIView):
 
     def get(self, request):
