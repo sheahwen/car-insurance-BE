@@ -5,6 +5,7 @@ from datetime import date, timedelta, datetime
 @admin.register(models.Contracts)
 class ContractsAdmin(admin.ModelAdmin):
     list_display = ['contract_no', 'application_date', 'application_status']
+    list_editable = ['application_status']
 
 
 @admin.register(models.Payables)
