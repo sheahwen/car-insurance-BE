@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 
     'account',
     'main_app',
-    'counter',
+    # 'counter',
     'rest_framework',
     'counter.apps.CounterConfig',
     'jwt_token',
