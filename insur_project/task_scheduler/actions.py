@@ -12,6 +12,8 @@ def generate_random_mileage():
     # retrieve all active contracts - application_status == true && between start and end dates
     yesterday = date.today()-timedelta(days=1)
 
+    print(yesterday)
+
     active_contracts = Contracts.objects.filter(
         application_status=True,
         start_date__lte=yesterday,
