@@ -7,6 +7,8 @@ https://km-insur-heroku.herokuapp.com/ (Backend)
 ## Idea
 Pay-per-km Insurance App is a platform for users to sign up for pay-per-km car insurance contracts. It is based on a relatively new auto insurance model where the insurance premium is calculated based on real time data and driving habits, thus bringing more fairness to customers. For example customers pay $30 fixed monthly fee + $0.03/km variable fee. 
 
+![](https://media.giphy.com/media/doztjVjNhTafA3k9HE/giphy.gif)
+
 ## Features and Technologies
 #### Stack - PDRN (Postgresql, Django, React, NodeJs)
 
