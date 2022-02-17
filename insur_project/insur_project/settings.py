@@ -9,10 +9,14 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+import os
+import django_heroku
 from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import django_heroku
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -25,7 +29,7 @@ SECRET_KEY = 'django-insecure-t@!t2r1o2_n_d$yjk59**brja1+g1ct42&sm3a3pb_70tn!1@c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['km-insur-heroku.herokuapp.com']
 
 AUTH_USER_MODEL = 'account.Account'
 AUTHENTICATION_BACKENDS = (
@@ -91,16 +95,29 @@ WSGI_APPLICATION = 'insur_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'insur_db',
+#         'USER': 'insur_admin',
+#         'PASSWORD': 'example',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432'
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'insur_db',
-        'USER': 'insur_admin',
-        'PASSWORD': 'example',
-        'HOST': '127.0.0.1',
+        'NAME': 'd2hl1eu2u1tbfb',
+        'USER': 'hczljwdoldsvtw',
+        'PASSWORD': '521c41675358cb1db10f956226e942ee03b1c8e74cba17a69bf78b0b78c650f8',
+        'HOST': 'ec2-18-215-8-186.compute-1.amazonaws.com',
         'PORT': '5432'
     }
 }
+
+
 
 
 # Password validation
@@ -137,7 +154,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
+django_heroku.settings(locals())
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
